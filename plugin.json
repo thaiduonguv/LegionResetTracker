@@ -1,0 +1,7 @@
+{
+  "Name": "LegionResetTracker",
+  "Author": "vu x Copilot",
+  "Version": "1.0.0",
+  "Description": "Plugin theo dõi trạng thái Legion 5-Way",
+  "CompatibleVersions": [ "3.26.0.0.5" ]
+}
