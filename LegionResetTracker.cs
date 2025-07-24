@@ -1,10 +1,15 @@
-using System;
-using System.Diagnostics;
-using System.IO;
+﻿using ExileCore;
+using ExileCore.PoEMemory.Components;
+using ExileCore.PoEMemory.MemoryObjects;
+using SharpDX;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Numerics;
-using ExileCore;
-using ImGuiNET;
+using static ExileCore.PoEMemory.MemoryObjects.ServerInventory;
+using System.Threading.Tasks;
+using System;
+using System.Drawing;
+using System.Threading;
 
 public class LegionResetTracker : BasePlugin
 {
