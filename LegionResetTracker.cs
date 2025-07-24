@@ -11,7 +11,8 @@ using System;
 using System.Drawing;
 using System.Threading;
 
-public class LegionResetTracker : BasePlugin
+public class LegionResetTracker : BaseSettingsPlugin<LegionResetTrackerSettings>
+
 {
     private Stopwatch waveTimer;
     private int currentWave;
