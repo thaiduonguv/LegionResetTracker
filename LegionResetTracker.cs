@@ -1,18 +1,12 @@
-﻿using ExileCore;
-using ExileCore.PoEMemory.Components;
-using ExileCore.PoEMemory.MemoryObjects;
-using SharpDX;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using static ExileCore.PoEMemory.MemoryObjects.ServerInventory;
-using System.Threading.Tasks;
 using System;
-using System.Drawing;
-using System.Threading;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Numerics;
+using ExileCore;
+using ImGuiNET;
 
 public class LegionResetTracker : BaseSettingsPlugin<LegionResetTrackerSettings>
-
 {
     private Stopwatch waveTimer;
     private int currentWave;
@@ -40,8 +34,8 @@ public class LegionResetTracker : BaseSettingsPlugin<LegionResetTrackerSettings>
 
     public override void Render()
     {
-        if (!GameController.Game.IngameState.InGame)
-            return;
+        if (!Settings.Enable) return;
+        if (!GameController.Game.IngameState.InGame) return;
 
         ImGui.Begin("Legion Reset Tracker");
 
@@ -66,7 +60,7 @@ public class LegionResetTracker : BaseSettingsPlugin<LegionResetTrackerSettings>
         ImGui.Text($"Wave: {currentWave}");
         ImGui.Text($"Time: {waveTimer.Elapsed.TotalSeconds:F2}s");
 
-        double time = waveTimer.Elapsed.TotalSeconds;
+        var time = waveTimer.Elapsed.TotalSeconds;
         if (time > 20)
             ImGui.TextColored(new Vector4(1f, 0f, 0f, 1f), "⛔ Reset Delay!");
         else if (time > 17)
@@ -81,7 +75,7 @@ public class LegionResetTracker : BaseSettingsPlugin<LegionResetTrackerSettings>
         foreach (var boss in new[] { "Stone", "Vagan", "Marceus" })
         {
             bool alive = bossChecker.IsBossAlive(boss);
-            Vector4 color = alive ? new Vector4(0f, 1f, 0f, 1f) : new Vector4(1f, 0f, 0f, 1f);
+            var color = alive ? new Vector4(0f, 1f, 0f, 1f) : new Vector4(1f, 0f, 0f, 1f);
             ImGui.TextColored(color, $"{boss}: {(alive ? "✅ Present" : "❌ Missing")}");
         }
 
